@@ -8,7 +8,7 @@
     function build(snapshot) {
         const lines = FIELDS.map(field => `• ${field.label}: ${displayValue(snapshot.values[field.id])}`);
         return [
-            `Programa: ${formatLongDate(snapshot.date)}`,
+            `Programa: ${formatLongDate(snapshot.date)}.`,
             ...lines,
             '',
             FOOTER.quote,
