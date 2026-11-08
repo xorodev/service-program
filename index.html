@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'none'; form-action 'none'">
+    <title>Programa del Servicio</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen py-6 px-4 flex flex-col items-center justify-center font-sans antialiased">
+
+    <div class="w-full max-w-md mb-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 bg-slate-800/90 backdrop-blur border border-slate-700 p-3 rounded-2xl shadow-xl">
+        <div id="theme-switcher" class="flex items-center justify-center gap-2">
+            <span class="inline-flex items-center justify-center h-8 text-xs font-semibold leading-none text-slate-300 uppercase tracking-wider">Temas disponibles:</span>
+            <button type="button" data-theme="classic" class="inline-flex items-center justify-center h-8 px-3 rounded-lg text-xs font-semibold leading-none bg-gradient-to-r from-slate-900 to-amber-950 text-gold-300 border border-gold-500/50 hover:border-gold-400 transition-all">Dorado</button>
+            <button type="button" data-theme="royal" class="inline-flex items-center justify-center h-8 px-3 rounded-lg text-xs font-semibold leading-none bg-gradient-to-r from-blue-950 to-indigo-950 text-blue-200 border border-blue-400/50 hover:border-blue-300 transition-all">Azul</button>
+            <button type="button" data-theme="light" class="inline-flex items-center justify-center h-8 px-3 rounded-lg text-xs font-semibold leading-none bg-amber-50 text-slate-900 border border-amber-300 hover:bg-white transition-all">Claro</button>
+        </div>
+
+        <div class="flex items-center justify-center gap-2">
+            <button type="button" id="btn-copy" title="Copiar texto para WhatsApp" class="inline-flex items-center justify-center gap-1.5 h-8 px-3 bg-slate-700 hover:bg-slate-600 text-slate-100 rounded-xl transition-all text-xs font-medium leading-none">
+                <svg class="icon w-3.5 h-3.5" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span class="hidden sm:inline">Copiar texto</span>
+            </button>
+            <button type="button" id="btn-share" title="Compartir imagen por WhatsApp u otras aplicaciones" class="inline-flex items-center justify-center gap-1.5 h-8 px-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl shadow-md transition-all text-xs leading-none disabled:opacity-60 disabled:cursor-not-allowed">
+                <svg class="icon w-3.5 h-3.5" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>
+                <span>Compartir</span>
+            </button>
+            <button type="button" id="btn-download" class="inline-flex items-center justify-center gap-1.5 h-8 px-3 bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold rounded-xl shadow-md transition-all text-xs leading-none disabled:opacity-60 disabled:cursor-not-allowed">
+                <svg class="icon w-3.5 h-3.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+                <span>Descargar imagen</span>
+            </button>
+        </div>
+    </div>
+
+    <details id="editor-panel" class="w-full max-w-md mb-5 bg-slate-800/90 backdrop-blur border border-slate-700 rounded-2xl shadow-xl">
+        <summary class="flex items-center justify-between gap-2 p-3 cursor-pointer select-none text-xs font-semibold text-slate-300 uppercase tracking-wider">
+            <span class="flex items-center gap-2">
+                <svg class="icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>
+                Personalizar valores
+            </span>
+            <svg class="icon editor-chevron w-3.5 h-3.5 transition-transform" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+        </summary>
+
+        <div class="p-3 pt-1 space-y-3">
+            <div>
+                <label for="date-input" class="block mb-1 text-xs font-semibold text-slate-300">Fecha del próximo programa:</label>
+                <input type="date" id="date-input" class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-slate-100 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-all">
+            </div>
+
+            <div id="editor-fields" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+
+            <button type="button" id="btn-reset" class="w-full px-3 py-2 rounded-xl text-xs font-semibold bg-slate-700 hover:bg-slate-600 text-slate-100 transition-all">¡Restablecer valores!</button>
+        </div>
+    </details>
+
+    <h2 class="w-full max-w-md mb-3 text-center text-xs font-semibold text-slate-300 uppercase tracking-wider">Vista previa de la imagen:</h2>
+
+    <div id="program-card">
+
+        <svg class="corner icon absolute top-3 left-3 w-6 h-6" viewBox="0 0 24 24"><path d="M1 23V13A12 12 0 0 1 13 1H23"></path></svg>
+        <svg class="corner icon absolute top-3 right-3 w-6 h-6" viewBox="0 0 24 24"><path d="M1 1H11A12 12 0 0 1 23 13V23"></path></svg>
+        <svg class="corner icon absolute bottom-3 left-3 w-6 h-6" viewBox="0 0 24 24"><path d="M1 1V11A12 12 0 0 0 13 23H23"></path></svg>
+        <svg class="corner icon absolute bottom-3 right-3 w-6 h-6" viewBox="0 0 24 24"><path d="M1 23H11A12 12 0 0 0 23 11V1"></path></svg>
+
+        <div class="text-center mb-5 relative flex flex-col items-center">
+            <div id="theme-icon-wrap">
+                <svg class="icon w-5 h-5" viewBox="0 0 24 24"><path d="M12 3v18M7 8h10"></path></svg>
+            </div>
+
+            <h1 id="theme-title">PROGRAMA DE CULTO</h1>
+
+            <div class="flex items-center justify-center gap-2 my-2">
+                <div id="theme-divider-l"></div>
+                <span id="theme-dove">
+                    <svg class="icon-fill w-3 h-3" viewBox="0 0 24 24"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"></path></svg>
+                </span>
+                <div id="theme-divider-r"></div>
+            </div>
+
+            <p id="theme-date">
+                <svg id="theme-date-icon" class="icon w-3.5 h-3.5 mr-1.5 shrink-0" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M3 9h18M8 2v4M16 2v4"></path></svg>
+                <span id="program-date-text"></span>
+            </p>
+        </div>
+
+        <div id="participations" class="space-y-2 mb-5"></div>
+
+        <div id="theme-footer">
+            <p id="theme-quote"></p>
+            <p id="theme-blessing"></p>
+        </div>
+
+    </div>
+
+    <div class="fixed inset-x-4 bottom-5 z-50 flex justify-center pointer-events-none">
+        <div id="toast" role="status" aria-live="polite" class="toast bg-gold-500 text-slate-950 font-bold pl-4 pr-2 py-2 rounded-2xl shadow-2xl flex items-center gap-2 text-xs max-w-md">
+            <svg class="icon w-4 h-4 shrink-0" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9 12l2 2 4-4"></path></svg>
+            <span id="toast-msg" class="min-w-0 break-words"></span>
+            <button type="button" id="toast-close" aria-label="Cerrar notificación" class="inline-flex items-center justify-center w-6 h-6 shrink-0 rounded-full hover:bg-slate-950/10 transition-colors">
+                <svg class="icon w-3.5 h-3.5" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="js/namespace.js"></script>
+    <script src="js/config/program.js"></script>
+    <script src="js/config/themes.js"></script>
+    <script src="js/utils/text.js"></script>
+    <script src="js/utils/date.js"></script>
+    <script src="js/services/storage.js"></script>
+    <script src="js/services/clipboard.js"></script>
+    <script src="js/state/program-state.js"></script>
+    <script src="js/services/share-text.js"></script>
+    <script src="js/ui/toast.js"></script>
+    <script src="js/ui/theme-manager.js"></script>
+    <script src="js/ui/program-view.js"></script>
+    <script src="js/ui/editor.js"></script>
+    <script src="js/export/canvas-renderer.js"></script>
+    <script src="js/export/image-exporter.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+<!-- Created by: @xorodev (CipherCoreDev). 2026 -->

@@ -1,0 +1,141 @@
+#program-card::selection,
+#program-card ::selection {
+    background-color: var(--selection-bg);
+    color: var(--selection-text);
+}
+
+#program-card {
+    width: 448px;
+    max-width: 100%;
+    box-sizing: border-box;
+    container-type: inline-size;
+}
+
+.icon {
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    display: block;
+}
+
+.icon-fill {
+    fill: currentColor;
+    stroke: none;
+    display: block;
+}
+
+#theme-title {
+    white-space: nowrap;
+    padding-left: 0.1em;
+    line-height: 1.2;
+}
+
+#theme-blessing {
+    padding-left: 0.025em;
+}
+
+.theme-item {
+    min-height: 46px;
+    padding-block: 8px;
+    box-sizing: border-box;
+}
+
+.theme-item span {
+    line-height: 1;
+}
+
+.theme-item .theme-label {
+    white-space: nowrap;
+}
+
+.theme-item .theme-val {
+    line-height: 1.25;
+    text-wrap: balance;
+}
+
+@container (max-width: 340px) {
+    .theme-item {
+        flex-wrap: wrap;
+        row-gap: 4px;
+    }
+
+    .theme-item .theme-val {
+        flex-basis: 100%;
+    }
+}
+
+#theme-date {
+    height: 28px;
+    line-height: 1;
+    box-sizing: border-box;
+}
+
+#theme-date span {
+    line-height: 1;
+}
+
+#editor-panel summary {
+    list-style: none;
+}
+
+#editor-panel summary::-webkit-details-marker {
+    display: none;
+}
+
+#editor-panel[open] .editor-chevron {
+    transform: rotate(180deg);
+}
+
+#editor-panel input {
+    color-scheme: dark;
+}
+
+.toast {
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
+
+.toast.toast-visible {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: opacity 300ms ease-out, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#program-card,
+#program-card * {
+    transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
+}
+
+button:not(:disabled):active {
+    transform: scale(0.96);
+}
+
+@keyframes panel-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#editor-panel[open] > div {
+    animation: panel-reveal 250ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/* Created by: @xorodev (CipherCoreDev). 2026 */
