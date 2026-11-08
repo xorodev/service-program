@@ -1,0 +1,11 @@
+{
+  "name": "service-program",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i src/tailwind.css -o css/tailwind.css --minify && node scripts/seal-css.js"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
